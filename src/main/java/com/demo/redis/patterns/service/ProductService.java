@@ -14,9 +14,11 @@ public interface ProductService {
 
     Mono<Booking> readthrough(String id);
 
-    Mono<Booking> cacheAside(String id);
+    Mono<Booking> cacheAsideRead(String id);
 
-    Mono<Booking> getProduct(String id);
+    Mono<Void> cacheAsideWrite(ProductDto productDto);
+
+   Mono<Booking> getProduct(String id);
 
 
 }

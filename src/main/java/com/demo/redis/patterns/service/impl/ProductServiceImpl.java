@@ -15,7 +15,7 @@ import reactor.core.publisher.Mono;
 public class ProductServiceImpl implements ProductService {
 
   @Override
-  @WriteThroughCache(key =  "#productDto.id",  useArgsHash = true)
+  @WriteThroughCache(key =  "#productDto.id")
   public Mono<Void> saveWriteThrough(ProductDto productDto) {
     return Mono.empty().then();
 
@@ -35,16 +35,23 @@ public class ProductServiceImpl implements ProductService {
 
 
   @Override
-  @CacheAside(key = "#id")
-  public Mono<Booking> cacheAside(String id) {
-    return this.cacheAside(id);
+  @CacheAsideRead(key = "#id")
+  public Mono<Booking> cacheAsideRead(String id) {
+    return this.cacheAsideRead(id);
   }
 
 
+  @Override
+  @CacheAsideWrite(key =  "#productDto.id")
+  public Mono<Void> cacheAsideWrite(ProductDto productDto) {
+    return Mono.empty().then();
+
+  }
 
   @Override
   public Mono<Booking> getProduct(String id) {
         return this.getProduct(id);
 
   }
+
 }

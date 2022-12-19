@@ -32,9 +32,14 @@ public class ProductController {
         return this.productService.readthrough(id);
     }
 
-    @GetMapping("/cacheAside/{id}")
-    public Mono<Booking> cacheAside(@PathVariable String id) {
-        return productService.cacheAside(id);
+    @GetMapping("/cacheAsideRead/{id}")
+    public Mono<Booking> cacheAsideRead(@PathVariable String id) {
+        return productService.cacheAsideRead(id);
+    }
+
+    @PostMapping("/cacheAsideWrite")
+    public Mono<Void> cacheAsideWrite(@RequestBody ProductDto productDto) {
+        return productService.cacheAsideWrite(productDto);
     }
 
     @GetMapping("{id}")

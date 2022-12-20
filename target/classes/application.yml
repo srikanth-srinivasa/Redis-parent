@@ -1,0 +1,39 @@
+
+server:
+  port: 8091
+
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: soil
+  cloud:
+    compatibility-verifier:
+      enabled: false
+
+enableCache: true
+
+
+
+
+redis-config:
+  setmax-size: 50
+  eviction-type: LRU
+
+
+
+
+
+logging:
+  level:
+    org.springframework.data.r2dbc: DEBUG
+  pattern:
+    level: "[%thread] [%X{correlationId}] %-5level %logger{36} - %msg%n"
+
+
+redis:
+  ssl: true
+  host: 127.0.0.1
+  port: 6379
+  cache-name: "cache-test"
+  cache-ttl: 1

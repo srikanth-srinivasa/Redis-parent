@@ -15,22 +15,6 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @PostMapping("/saveWriteThrough")
-    public Mono<Void> saveWriteThrough(@RequestBody ProductDto productDto) {
-        return productService.saveWriteThrough(productDto);
-    }
-
-
-    @PostMapping("/saveWriteBehind")
-    public Mono<Void> saveWriteBehind(@RequestBody  ProductDto productDto) {
-        return productService.saveWriteBehind(productDto);
-    }
-
-
-    @GetMapping("readthrough/{id}")
-    public Mono<Booking> readthrough(@PathVariable String id){
-        return this.productService.readthrough(id);
-    }
 
     @GetMapping("/cacheAsideRead/{id}")
     public Mono<Booking> cacheAsideRead(@PathVariable String id) {
@@ -42,10 +26,7 @@ public class ProductController {
         return productService.cacheAsideWrite(productDto);
     }
 
-    @GetMapping("{id}")
-    public Mono<Booking> getProduct(@PathVariable String id){
-        return this.productService.getProduct(id);
-    }
+
 
 
 }

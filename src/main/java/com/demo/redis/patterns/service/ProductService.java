@@ -8,17 +8,12 @@ public interface ProductService {
 
 
 
-    Mono<Void> saveWriteThrough(ProductDto productDto);
-
-    Mono<Void> saveWriteBehind(ProductDto productDto);
-
-    Mono<Booking> readthrough(String id);
 
     Mono<Booking> cacheAsideRead(String id);
 
     Mono<Void> cacheAsideWrite(ProductDto productDto);
 
-   Mono<Booking> getProduct(String id);
+
 
 
 }

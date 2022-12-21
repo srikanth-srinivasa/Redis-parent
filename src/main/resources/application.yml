@@ -36,4 +36,4 @@ redis:
   host: 127.0.0.1
   port: 6379
   cache-name: "cache-test"
-  cache-ttl: 10
+  cache-ttl: 1

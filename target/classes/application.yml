@@ -14,8 +14,7 @@ spring:
 enableCache: true
 
 
-cache-ttls:
-  booking: 1
+
 
 redis-config:
   setmax-size: 50
@@ -36,3 +35,5 @@ redis:
   ssl: true
   host: 127.0.0.1
   port: 6379
+  cache-name: "cache-test"
+  cache-ttl: 1

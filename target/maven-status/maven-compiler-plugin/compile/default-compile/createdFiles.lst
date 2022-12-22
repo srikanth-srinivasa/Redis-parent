@@ -1,7 +1,0 @@
-com\demo\redis\patterns\controller\ProductController.class
-com\demo\redis\patterns\service\impl\ProductServiceImpl.class
-com\demo\redis\patterns\service\ProductService.class
-com\demo\redis\patterns\dto\ProductDto.class
-com\demo\redis\patterns\RedisSpringApplication.class
-net\apmoller\crb\telikos\microservices\cache\library\entity\Booking.class
-net\apmoller\crb\telikos\microservices\cache\library\dto\ProductDto.class

@@ -15,7 +15,11 @@ import reactor.core.publisher.Mono;
 public class ProductServiceImpl implements ProductService {
 
 
-
+  /**
+   * Method to  read  the cached valued for teh given key
+   * @PathVariable id
+   * @return Mono<Booking>
+   */
   @Override
   @CacheAsideRead(key = "#id")
   public Mono<Booking> cacheAsideRead(String id) {
@@ -23,6 +27,11 @@ public class ProductServiceImpl implements ProductService {
   }
 
 
+  /**
+   * Method to  write to Redis cache
+   * @PathVariable ProductDto
+   * @return Mono<Void>
+   */
   @Override
   @CacheAsideWrite(key =  "#productDto.id")
   public Mono<Void> cacheAsideWrite(ProductDto productDto) {

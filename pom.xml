@@ -14,6 +14,7 @@
 	<name>redis-spring</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
+		<reactor.kafka.version>1.2.2.RELEASE</reactor.kafka.version>
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
@@ -62,12 +63,31 @@
 			<version>3.16.3</version>
 		</dependency>
 
+		<dependency>
+			<groupId>net.apmoller.crb.telikos.libraries.redis</groupId>
+			<artifactId>redis-service</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
 
 		<dependency>
-			<groupId>net.apmoller.crb.telikos</groupId>
-			<artifactId>redis-reactive-cache-library</artifactId>
-			<version>1.0.24-SNAPSHOT</version>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>io.projectreactor.kafka</groupId>
+			<artifactId>reactor-kafka</artifactId>
+			<version>${reactor.kafka.version}</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>net.apmoller.telikos.library</groupId>
+			<artifactId>kafkaconsumer-service</artifactId>
+			<version>1.0.28-SNAPSHOT</version>
+		</dependency>
+
 
 
 	</dependencies>

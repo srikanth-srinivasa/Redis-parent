@@ -21,17 +21,10 @@ spring:
           trusted:
             packages: net.apmoller.crb.telikos.libraries.kafkaconsumer
     producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-      topics:
-        PRODUCER_DTO_TOPIC: booking_dto_topic
+
+
     consumer:
-      group-id: reactivekafkaconsumerandproducer
-      auto:
-        offset:
-          reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+
       max:
         poll:
           records: 1
@@ -39,8 +32,7 @@ spring:
         spring.json.trusted.packages: "*"
         spring.json.use.type.headers: false
         spring.json.value.default.type: "net.apmoller.crb.telikos.libraries.kafkaconsumer.dto.BookingDTO"
-      topics:
-        CONSUMER_DTO_TOPIC: booking_dto_topic
+
 
 
 enableCache: true
@@ -48,9 +40,8 @@ redis-config:
   setmax-size: 50
   eviction-type: LRU
 
-PRODUCER_DTO_TOPIC: booking_dto_topic
-CONSUMER_DTO_TOPIC: booking_dto_topic
 
+kafka.topic: booking_dto_topic
 
 
 logging:

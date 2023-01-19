@@ -71,23 +71,10 @@
 
 
 		<dependency>
-			<groupId>org.springframework.kafka</groupId>
-			<artifactId>spring-kafka</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>io.projectreactor.kafka</groupId>
-			<artifactId>reactor-kafka</artifactId>
-			<version>${reactor.kafka.version}</version>
-		</dependency>
-
-
-		<dependency>
 			<groupId>net.apmoller.telikos.library</groupId>
 			<artifactId>kafkaconsumer-service</artifactId>
-			<version>1.0.28-SNAPSHOT</version>
+			<version>1.0.5</version>
 		</dependency>
-
 
 
 	</dependencies>

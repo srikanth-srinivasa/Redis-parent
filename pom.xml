@@ -77,6 +77,50 @@
 		</dependency>
 
 
+
+
+		<dependency>
+			<groupId>org.apache.avro</groupId>
+			<artifactId>avro</artifactId>
+			<version>1.11.0</version>
+		</dependency>
+
+
+
+
+		<dependency>
+			<groupId>io.confluent</groupId>
+			<artifactId>common-config</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.confluent</groupId>
+			<artifactId>common-utils</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.confluent</groupId>
+			<artifactId>kafka-schema-registry-client</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.confluent</groupId>
+			<artifactId>kafka-avro-serializer</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+
+
+
+
+
+
+<!--		<dependency>-->
+<!--			<groupId>net.apmoller.crb.ohm.microservices.producer.library</groupId>-->
+<!--			<artifactId>producer-library-service</artifactId>-->
+<!--			<version>1.0.1</version>-->
+<!--		</dependency>-->
+
+
 	</dependencies>
 
 	<build>

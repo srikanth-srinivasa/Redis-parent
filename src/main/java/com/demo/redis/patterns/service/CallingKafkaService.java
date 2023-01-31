@@ -13,4 +13,8 @@ public interface CallingKafkaService<K, V> {
 
 
     Flux<V> consume();
+
+
+    Flux<V> consumeFromAvro();
+
 }

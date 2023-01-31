@@ -21,6 +21,8 @@ public class CallingKafkaServiceImpl<K,V> implements CallingKafkaService<K,V> {
     @Autowired
     ReactiveKafkaConsumerTemplate<K,V> reactiveKafkaConsumerTemplate;
 
+
+
     @Override
     public Flux<V> consume() {
 
@@ -39,6 +41,23 @@ public class CallingKafkaServiceImpl<K,V> implements CallingKafkaService<K,V> {
             .doOnError(throwable -> log.error("something bad happened while consuming : {}", throwable.getMessage()));
     }
 
+    @Override
+    public Flux<V> consumeFromAvro() {
+
+        return (Flux<V>) reactiveKafkaConsumerTemplate
+                .receiveAutoAck()
+                // .delayElements(Duration.ofSeconds(2L)) // BACKPRESSURE
+                .doOnNext(consumerRecord -> log.info("received  from consumeFromAvro key={}, value={} : " +
+                                " from topic={}, offset={}" ,
+                        consumerRecord.key(),
+                        consumerRecord.value(),
+                        consumerRecord.topic(),
+                        consumerRecord.offset())
+                )
+                .map(ConsumerRecord::value)
+                .doOnNext(order -> log.info("successfully consumed from consumeFromAvro {}",  order))
+                .doOnError(throwable -> log.error("something bad happened while consuming from consumeFromAvro : {}", throwable.getMessage()));
+    }
 
 
 }

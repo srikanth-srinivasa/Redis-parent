@@ -1,4 +1,4 @@
-KAFKA_BOOTSTRAPSERVERS: localhost:9092
+KAFKA_BOOTSTRAPSERVERS: localhost:29092
 
 
 server:
@@ -20,10 +20,13 @@ spring:
         json:
           trusted:
             packages: net.apmoller.crb.telikos.libraries.kafkaconsumer
+
+
     producer:
 
 
     consumer:
+
 
       max:
         poll:
@@ -62,3 +65,11 @@ redis:
   port: 6379
   cache-name: "cache-test"
   cache-ttl: 1
+
+
+azure:
+  storage:
+    account-name: dasd
+    account-key: dsasd
+    blob-endpoint: url
+

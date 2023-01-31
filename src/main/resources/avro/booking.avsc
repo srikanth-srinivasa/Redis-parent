@@ -1,0 +1,62 @@
+{
+    "type": "record",
+    "name": "BookingAvro",
+    "namespace": "com.demo.redis.patterns.dto",
+    "fields": [{
+        "name": "bookingNumber",
+        "type": "string"
+
+    }, {
+        "name": "product",
+        "type": "string"
+
+    }, {
+        "name": "remarkExternal",
+        "type": "string"
+
+    }, {
+        "name": "remarkInternal",
+        "type": "string"
+
+    }, {
+        "name": "summaryDescriptionOfGoods",
+        "type": "string"
+
+    }, {
+        "name": "summaryMarksAndNumbers",
+        "type": "string"
+
+    }, {
+        "name": "totalBookedGrossWeight",
+        "type": "string"
+
+    }, {
+        "name": "totalBookedInnerItemQuantity",
+        "type": "string"
+
+    }, {
+        "name": "totalBookedItemQuantity",
+        "type": "string"
+
+    }, {
+        "name": "totalBookedNetNetWeight",
+        "type": "string"
+
+    }, {
+        "name": "totalBookedNetWeight",
+        "type": "string"
+
+    }, {
+        "name": "totalBookedPackageQuantity",
+        "type": "string"
+
+    }, {
+        "name": "totalBookedVolume",
+        "type": "string"
+
+    }, {
+        "name": "totalCargoValue",
+        "type": "string"
+
+    }]
+}

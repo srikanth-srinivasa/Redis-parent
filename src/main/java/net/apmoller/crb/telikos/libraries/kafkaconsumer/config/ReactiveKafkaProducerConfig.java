@@ -2,11 +2,16 @@ package net.apmoller.crb.telikos.libraries.kafkaconsumer.config;
 
 
 import com.demo.redis.patterns.dto.BookingAvro;
+import io.confluent.kafka.serializers.KafkaAvroDeserializer;
+import io.confluent.kafka.serializers.KafkaAvroSerializer;
 import lombok.extern.slf4j.Slf4j;
 import net.apmoller.crb.telikos.libraries.kafkaconsumer.dto.BookingDTO;
 import org.apache.kafka.clients.admin.*;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.Node;
+import org.apache.kafka.common.serialization.StringDeserializer;
+import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.health.AbstractHealthIndicator;
 import org.springframework.boot.actuate.health.Health;
@@ -17,6 +22,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.KafkaAdmin;
 import org.springframework.kafka.core.reactive.ReactiveKafkaProducerTemplate;
+import org.springframework.kafka.support.serializer.ErrorHandlingDeserializer;
 import reactor.kafka.sender.SenderOptions;
 
 import java.util.ArrayList;
@@ -46,7 +52,17 @@ public class ReactiveKafkaProducerConfig {
 
     @Bean
     public ReactiveKafkaProducerTemplate<String, BookingDTO> reactiveKafkaProducerTemplate( KafkaProperties properties) {
-        Map<String, Object> props = properties.buildProducerProperties();
+       // Map<String, Object> props = properties.buildProducerProperties();
+
+        Properties props = new Properties();
+        props.put("bootstrap.servers", "localhost:29092");
+        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
+                org.apache.kafka.common.serialization.StringSerializer.class);
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
+                org.springframework.kafka.support.serializer.JsonSerializer.class);
+        props.put("schema.registry.url", "http://localhost:8081");
+
+
         return new ReactiveKafkaProducerTemplate<String, BookingDTO>(SenderOptions.create(props));
     }
 
@@ -56,10 +72,12 @@ public class ReactiveKafkaProducerConfig {
 
         Properties props = new Properties();
         props.put("bootstrap.servers", "localhost:29092");
-        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
-                io.confluent.kafka.serializers.KafkaAvroSerializer.class);
-        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
-                io.confluent.kafka.serializers.KafkaAvroSerializer.class);
+
+        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, KafkaAvroSerializer.class);
+
+
+
         props.put("schema.registry.url", "http://localhost:8081");
 
 

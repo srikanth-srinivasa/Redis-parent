@@ -33,14 +33,14 @@ public class ProductController {
 
 
 
-    @PostMapping("/reactive-publish")
+    @PostMapping("/reactive-publish-plain")
     public void publishMessageToTopic(@RequestBody BookingDTO booking){
-        log.info("in reactive controller...publishMessageToTopic..");
+        log.info("in reactive controller...publishMessageToPlainTopic..");
 
         this.producerServiceImpl.send(booking.getBookingNumber(), booking);
     }
 
-    @GetMapping("/reactive-subscribe")
+    @GetMapping("/reactive-subscribe-plain")
     public Flux<BookingDTO>  consumeMessagesFromToTopic(){
         log.info("in reactive controller... consumeMessagesFromToTopic..");
 

@@ -30,8 +30,12 @@ public class ProducerServiceImpl implements ProducerService {
 
 
 
-  @Value("${kafka.topic}")
-  private String topic;
+  @Value("${kafka.plain-topic}")
+  private String plaintopic;
+
+  @Value("${kafka.avro-topic}")
+  private String avrotopic;
+
 
 
   public ProducerServiceImpl(ReactiveKafkaProducerTemplate<String, BookingDTO> reactiveKafkaProducerTemplate, ReactiveKafkaProducerTemplate<String, BookingAvro> reactiveKafkaProducerAvroTemplate) {
@@ -42,9 +46,9 @@ public class ProducerServiceImpl implements ProducerService {
   @Override
   public void send(String bookingNumber, BookingDTO booking) {
 
-    log.info("In ReactiveProducerService---- sending  to topic={}, {}={},", topic, BookingDTO.class.getSimpleName(), booking);
-    reactiveKafkaProducerTemplate.send(topic, bookingNumber, booking)
-            .doOnSuccess(senderResult -> log.info("In ReactiveProducerService---- succesfully sent {}==>for  offset : {}", booking, senderResult.recordMetadata().offset()))
+    log.info("In ReactiveProducerService---- sending  to demo_topic ={}, {}={},", plaintopic, BookingDTO.class.getSimpleName(), booking);
+    reactiveKafkaProducerTemplate.send(plaintopic, bookingNumber, booking)
+            .doOnSuccess(senderResult -> log.info("In ReactiveProducerService---- succesfully sent to demo_topic {}==>for  offset : {}", booking, senderResult.recordMetadata().offset()))
             .subscribe();
 
   }
@@ -55,15 +59,11 @@ public class ProducerServiceImpl implements ProducerService {
 
 
 
-      log.info("In ReactiveProducerService---- publishMessageToAvroTopic--sending  to sendToAvroTopic ={}, {}={},", topic, BookingAvro.class.getSimpleName(), bookingAvro);
-      reactiveKafkaProducerAvroTemplate.send(topic, bookingNumber,bookingAvro)
-              .doOnSuccess(senderResult -> log.info("In ReactiveProducerService---- publishMessageToAvroTopic --- succesfully sent {}==>for  Topic : {}", bookingAvro,topic))
+      log.info("In ReactiveProducerService---- publishMessageToAvroTopic--sending  to sendToAvroTopic ={}, {}={},", avrotopic, BookingAvro.class.getSimpleName(), bookingAvro);
+      reactiveKafkaProducerAvroTemplate.send(avrotopic, bookingNumber,bookingAvro)
+              .doOnSuccess(senderResult -> log.info("In ReactiveProducerService---- publishMessageToAvroTopic --- succesfully sent {}==>for  Topic : {}", bookingAvro,avrotopic))
+              .doOnError(e -> log.error("Send failed-----", e))
               .subscribe();
-
-
-
-
-
 
   }
 

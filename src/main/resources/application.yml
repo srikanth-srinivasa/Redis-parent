@@ -20,8 +20,6 @@ spring:
     auto-offset-reset: earliest
 
     producer:
-      key-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
       group-id: sample-group
       auto:
         offset:

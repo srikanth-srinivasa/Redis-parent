@@ -2,6 +2,8 @@ package net.apmoller.crb.telikos.libraries.kafkaconsumer.config;
 
 
 import com.demo.redis.patterns.dto.BookingAvro;
+import com.demo.redis.patterns.util.CompressionConfig;
+import com.demo.redis.patterns.util.CustomSerializer;
 import io.confluent.kafka.serializers.KafkaAvroDeserializer;
 import io.confluent.kafka.serializers.KafkaAvroSerializer;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +15,7 @@ import org.apache.kafka.common.Node;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.health.AbstractHealthIndicator;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
@@ -56,11 +59,18 @@ public class ReactiveKafkaProducerConfig {
 
         Properties props = new Properties();
         props.put("bootstrap.servers", "localhost:29092");
+
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
                 org.apache.kafka.common.serialization.StringSerializer.class);
-        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
-                org.springframework.kafka.support.serializer.JsonSerializer.class);
+
+//        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
+//                org.springframework.kafka.support.serializer.JsonSerializer.class);
+
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, CompressionConfig.class);
+
         props.put("schema.registry.url", "http://localhost:8081");
+
+        props.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, "gzip");
 
 
         return new ReactiveKafkaProducerTemplate<String, BookingDTO>(SenderOptions.create(props));
@@ -74,7 +84,12 @@ public class ReactiveKafkaProducerConfig {
         props.put("bootstrap.servers", "localhost:29092");
 
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, KafkaAvroSerializer.class);
+       // props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, KafkaAvroSerializer.class);
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, CompressionConfig.class);
+       // props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, CustomSerializer.class);
+
+        props.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, "gzip");
+
 
 
 
